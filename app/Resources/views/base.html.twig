@@ -15,13 +15,19 @@
                 <div class="col-sm-12">{{ render(controller('DragonlandsMovieBundle:Stats:index')) }}</div>
             </div>
             <div class="row">
-                <div class="col-sm-12"><div class="bg-info">MovieDB (C)2015 Mario J. Gaida</div></div>
+                <div class="col-sm-12"><div class="bg-info"><a href="/">MovieDB</a> (C)2015 Mario J. Gaida</div></div>
             </div>
             
             <div class="row">
                 <div class="col-sm-12">
                     {% block body %}{% endblock %}
                     {% block javascripts %}{% endblock %}
+
+                    <script>
+                        $(document).ready(function(){
+                            $('[data-toggle="tooltip"]').tooltip(); 
+                        });
+                    </script>
                 </div>
         </div>
     </body>

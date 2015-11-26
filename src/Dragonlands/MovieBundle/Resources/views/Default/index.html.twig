@@ -4,15 +4,19 @@
 
 {% block body %}
     <h1>Movies</h1>
-    <a class="btn btn-primary" href="/new">New Movie</a>
+    <p><a class="btn btn-primary" data-toggle="tooltip" title="Create a new movie entry" href="/new">New Movie</a></p>
     <ul class="list-group">
         {% for movie in movies %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-sm-9">{{ movie.titleOrig }}</div>
+                    <div class="col-sm-9">
+                        <p>{{ movie.titleOrig }}</p>
+                        <p class="small">{{ movie.titleDe }}</p>
+                    </div>
                     <div class="col-sm-3 text-right">
-                        <a class="btn btn-warning" href="/modify/{{ movie.id }}">Modify</a>
-                        <a class="btn btn-danger" href="/delete/{{ movie.id }}">Delete</a>
+                        <a class="btn btn-info" data-toggle="tooltip" title="Go to IMDB title" href="http://www.imdb.com/title/{{ movie.imdbId }}">IMDB</a>
+                        <a class="btn btn-warning" data-toggle="tooltip" title="Modify this movie" href="/modify/{{ movie.id }}">Modify</a>
+                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete this movie from the database" href="/delete/{{ movie.id }}">Delete</a>
                     </div>
                 </div>
             </li>
