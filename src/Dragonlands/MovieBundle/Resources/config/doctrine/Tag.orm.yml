@@ -1,0 +1,18 @@
+Dragonlands\MovieBundle\Entity\Tag:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    manyToMany:
+        movies:
+            targetEntity: Movie
+            mappedBy: tags

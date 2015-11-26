@@ -1,0 +1,15 @@
+homepage:
+    path:   /
+    defaults: { _controller: DragonlandsMovieBundle:Default:index }
+
+addMovie:
+    path:   /add
+    defaults: { _controller: DragonlandsMovieBundle:Default:add }
+
+newMovie:
+    path:   /new
+    defaults: { _controller: DragonlandsMovieBundle:Default:new }
+
+deleteMovie:
+    path:   /delete/{id}
+    defaults: { _controller: DragonlandsMovieBundle:Default:delete }

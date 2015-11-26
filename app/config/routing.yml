@@ -1,0 +1,3 @@
+dragonlands_movie:
+    resource: "@DragonlandsMovieBundle/Resources/config/routing.yml"
+    prefix:   /

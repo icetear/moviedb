@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movie-DB{% endblock %}
+
+{% block body %}
+
+    <p>MovieDB (C)2015 Mario J. Gaida <a class="btn btn-primary" href="/new">New Movie</a></p>
+    <hr>
+    <h1>Movies</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.titleOrig }} <a class="btn btn-danger" href="/delete/{{ movie.id }}">Delete</a></li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}
