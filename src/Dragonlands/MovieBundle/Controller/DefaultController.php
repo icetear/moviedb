@@ -69,6 +69,44 @@ class DefaultController extends Controller
             ));
     }
 
+
+    /*
+    *   show form for modifying an existing movie
+    */
+    public function modifyAction($id, Request $request)
+    {
+
+        $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Movie');
+        $movie = $repo->findOneById($id);
+        
+        $form = $this->createFormBuilder($movie)
+            ->add('titleOrig', 'text')
+            ->add('titleDe', 'text')
+            ->add('year', 'text')
+            ->add('length', 'text')
+            ->add('imdbId', 'text')
+            ->add('save', 'submit', array('label' => 'Save Movie'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isValid()) {
+
+            //  persist the new movie
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($movie);
+            $em->flush();
+
+            return $this->redirectToRoute('homepage');
+
+        }
+
+        return $this->render('DragonlandsMovieBundle:Default:new.html.twig', array(
+            'form' => $form->createView(),
+            ));
+    }
+
+
     public function deleteAction($id)
     {
         $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Movie');

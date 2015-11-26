@@ -13,3 +13,7 @@ newMovie:
 deleteMovie:
     path:   /delete/{id}
     defaults: { _controller: DragonlandsMovieBundle:Default:delete }
+
+modifyMovie:
+    path:   /modify/{id}
+    defaults: { _controller: DragonlandsMovieBundle:Default:modify }

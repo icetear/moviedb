@@ -3,14 +3,19 @@
 {% block title %}Movie-DB{% endblock %}
 
 {% block body %}
-
-    <p>MovieDB (C)2015 Mario J. Gaida <a class="btn btn-primary" href="/new">New Movie</a></p>
-    <hr>
     <h1>Movies</h1>
-    <ul>
+    <a class="btn btn-primary" href="/new">New Movie</a>
+    <ul class="list-group">
         {% for movie in movies %}
-            <li>{{ movie.titleOrig }} <a class="btn btn-danger" href="/delete/{{ movie.id }}">Delete</a></li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-9">{{ movie.titleOrig }}</div>
+                    <div class="col-sm-3 text-right">
+                        <a class="btn btn-warning" href="/modify/{{ movie.id }}">Modify</a>
+                        <a class="btn btn-danger" href="/delete/{{ movie.id }}">Delete</a>
+                    </div>
+                </div>
+            </li>
         {% endfor %}
     </ul>
-    
 {% endblock %}
