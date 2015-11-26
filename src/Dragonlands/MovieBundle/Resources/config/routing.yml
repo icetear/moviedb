@@ -2,10 +2,6 @@ homepage:
     path:   /
     defaults: { _controller: DragonlandsMovieBundle:Default:index }
 
-addMovie:
-    path:   /add
-    defaults: { _controller: DragonlandsMovieBundle:Default:add }
-
 newMovie:
     path:   /new
     defaults: { _controller: DragonlandsMovieBundle:Default:new }
@@ -17,3 +13,23 @@ deleteMovie:
 modifyMovie:
     path:   /modify/{id}
     defaults: { _controller: DragonlandsMovieBundle:Default:modify }
+
+showTags:
+    path:   /showTags
+    defaults: { _controller: DragonlandsMovieBundle:Tag:index }
+
+newTag:
+    path:   /newTag
+    defaults: { _controller: DragonlandsMovieBundle:Tag:new }
+
+deleteTag:
+    path:   /deleteTag/{id}
+    defaults: { _controller: DragonlandsMovieBundle:Tag:delete }
+
+modifyTag:
+    path:   /modifyTag/{id}
+    defaults: { _controller: DragonlandsMovieBundle:Tag:modify }
+
+getJsonSearchResultsForQuery:
+    path:   /getJsonSearchResultsForQuery
+    defaults: { _controller: DragonlandsMovieBundle:Tag:getJsonSearchResultsForQuery }

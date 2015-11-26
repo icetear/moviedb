@@ -18,23 +18,6 @@ class DefaultController extends Controller
         return $this->render('DragonlandsMovieBundle:Default:index.html.twig', array('movies' => $movies));
     }
 
-
-    /*
-    *	add a new dummy movie
-    */
-	public function addAction()
-	{
-		$movie = new Movie();
-		$movie->setTitleOrig('MyDummyMovie');
-
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($movie);
-		$em->flush();
-
-		return new Response('Created new movie with id '.$movie->getId());
-
-	}
-
     /*
     *   show form for adding a new movie
     */

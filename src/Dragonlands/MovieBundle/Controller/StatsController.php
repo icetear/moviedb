@@ -26,9 +26,14 @@ class StatsController extends Controller
         $users = $repo->findAll();
         $users_count = count($users);
         
+        $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Tag');
+        $tags = $repo->findAll();
+        $tags_count = count($tags);
+        
         return $this->render('DragonlandsMovieBundle:Stats:index.html.twig', 
             array('movies_count' => $movies_count,
-                'users_count' => $users_count));
+                'users_count' => $users_count,
+                'tags_count' => $tags_count));
     }
 
 }
