@@ -18,9 +18,14 @@
         {% for movie in movies %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <p>{{ movie.titleOrig }}</p>
                         <p class="small">{{ movie.titleDe }}</p>
+                    </div>
+                    <div class="col-sm-7">
+                        {% for tag in movie.tags %}
+                          <p>{{ tag }} ({{ tag.getRatingForMovie(movie) }})</p>
+                        {% endfor %}
                     </div>
                     <div class="col-sm-3 text-right">
                         <a class="btn btn-info" data-toggle="tooltip" title="Go to IMDB title" href="http://www.imdb.com/title/{{ movie.imdbId }}">IMDB</a>

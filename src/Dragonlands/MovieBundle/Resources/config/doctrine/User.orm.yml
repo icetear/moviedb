@@ -1,21 +1,25 @@
 Dragonlands\MovieBundle\Entity\User:
-    type: entity
-    table: null
-    repositoryClass: Dragonlands\MovieBundle\Entity\UserRepository
+  type: entity
+  repositoryClass: Dragonlands\MovieBundle\Entity\UserRepository
+  id:
     id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-    fields:
-        username:
-            type: string
-            length: 255
-        email:
-            type: string
-            length: 255
-        passwordhash:
-            type: string
-            length: 255
-    lifecycleCallbacks: {  }
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    username:
+      type: string
+      length: 255
+      nullable: true
+    email:
+      type: string
+      length: 255
+      nullable: true
+    passwordhash:
+      type: string
+      length: 255
+      nullable: true
+  oneToMany:
+    ratings:
+      targetEntity: Dragonlands\MovieBundle\Entity\Rating
+      mappedBy: user

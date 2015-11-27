@@ -13,9 +13,15 @@
     </head>
     <body>
         <div class="container-fluid">
+            {#                                                          #}
+            {#  integrate the statistics controller at top of the page  #}
+            {#                                                          #}
             <div class="row">
                 <div class="col-sm-12">{{ render(controller('DragonlandsMovieBundle:Stats:index')) }}</div>
             </div>
+            {#                                                          #}
+            {#  show a copyright notice with a backlink to the homepage #}
+            {#                                                          #}
             <div class="row">
                 <div class="col-sm-12"><div class="bg-info"><a href="/">MovieDB</a> (C)2015 Mario J. Gaida</div></div>
             </div>

@@ -1,3 +1,11 @@
+dragonlands_movie_user:
+    resource: "@DragonlandsMovieBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+dragonlands_movie_rating:
+    resource: "@DragonlandsMovieBundle/Resources/config/routing/rating.yml"
+    prefix:   /rating
+
 homepage:
     path:   /
     defaults: { _controller: DragonlandsMovieBundle:Default:index }

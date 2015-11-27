@@ -29,6 +29,16 @@ class User
 
 
     /**
+    * Get String representation of this entity
+    *
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->username;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -108,5 +118,54 @@ class User
     public function getPasswordhash()
     {
         return $this->passwordhash;
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+     
+    }
+
+   
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ratings;
+
+
+    /**
+     * Add rating
+     *
+     * @param \Dragonlands\MovieBundle\Entity\Rating $rating
+     *
+     * @return User
+     */
+    public function addRating(\Dragonlands\MovieBundle\Entity\Rating $rating)
+    {
+        $this->ratings[] = $rating;
+
+        return $this;
+    }
+
+    /**
+     * Remove rating
+     *
+     * @param \Dragonlands\MovieBundle\Entity\Rating $rating
+     */
+    public function removeRating(\Dragonlands\MovieBundle\Entity\Rating $rating)
+    {
+        $this->ratings->removeElement($rating);
+    }
+
+    /**
+     * Get ratings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRatings()
+    {
+        return $this->ratings;
     }
 }

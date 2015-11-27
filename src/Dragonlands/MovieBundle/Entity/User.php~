@@ -29,6 +29,16 @@ class User
 
 
     /**
+    * Get String representation of this entity
+    *
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->username;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -109,4 +119,14 @@ class User
     {
         return $this->passwordhash;
     }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+     
+    }
+
+   
 }

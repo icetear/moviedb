@@ -39,6 +39,50 @@ class Movie
 
 
     /**
+    * Get String representation of this entity
+    *
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->titleOrig.", ".$this->year." (".$this->titleDe.")";
+    }
+
+
+    /**
+    *   get all tags for this movie
+    *
+    * @var \Doctrine\Common\Collections\Collection
+    */
+    public function tags()
+    {
+
+
+        //  the tags that are relevant for this movie are those that have a rating
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'SELECT DISTINCT(r.tag_id)
+            FROM DragonlandsMovieBundle:Rating r
+            WHERE r.movie_id = :movie_id'
+            )->setParameters(array('movie_id' => $this->id));
+
+        $tag_ids = $query->getResult();
+
+        $tags = [];
+
+        $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Tag');
+        foreach($tag_ids as $tag_id)
+        {
+            //  get the tag
+            $tag = $repo->findOneById($tag_id);
+            $tags[] = $tag;
+        }
+
+        return $tags;
+        
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -177,40 +221,45 @@ class Movie
      */
     public function __construct()
     {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ratings;
+
 
     /**
-     * Add tag
+     * Add rating
      *
-     * @param \Dragonlands\MovieBundle\Entity\Tag $tag
+     * @param \Dragonlands\MovieBundle\Entity\Rating $rating
      *
      * @return Movie
      */
-    public function addTag(\Dragonlands\MovieBundle\Entity\Tag $tag)
+    public function addRating(\Dragonlands\MovieBundle\Entity\Rating $rating)
     {
-        $this->tags[] = $tag;
+        $this->ratings[] = $rating;
 
         return $this;
     }
 
     /**
-     * Remove tag
+     * Remove rating
      *
-     * @param \Dragonlands\MovieBundle\Entity\Tag $tag
+     * @param \Dragonlands\MovieBundle\Entity\Rating $rating
      */
-    public function removeTag(\Dragonlands\MovieBundle\Entity\Tag $tag)
+    public function removeRating(\Dragonlands\MovieBundle\Entity\Rating $rating)
     {
-        $this->tags->removeElement($tag);
+        $this->ratings->removeElement($rating);
     }
 
     /**
-     * Get tags
+     * Get ratings
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTags()
+    public function getRatings()
     {
-        return $this->tags;
+        return $this->ratings;
     }
 }

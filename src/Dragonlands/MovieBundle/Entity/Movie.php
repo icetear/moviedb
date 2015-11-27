@@ -39,6 +39,40 @@ class Movie
 
 
     /**
+    * Get String representation of this entity
+    *
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->titleOrig.", ".$this->year." (".$this->titleDe.")";
+    }
+
+
+    /**
+    *   get all tags for this movie
+    *
+    * @var \Doctrine\Common\Collections\Collection
+    */
+    public function tags()
+    {
+
+        //  we already have the ratings for this movie
+        //  now we must group them by tag
+
+        $tags = [];
+
+        foreach($this->ratings as $rating)
+        {
+            $tag = $rating->getTag();
+            if(!in_array($tag, $tags)) $tags[] = $tag;
+        }
+
+        return $tags;
+        
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -177,40 +211,45 @@ class Movie
      */
     public function __construct()
     {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ratings;
+
 
     /**
-     * Add tag
+     * Add rating
      *
-     * @param \Dragonlands\MovieBundle\Entity\Tag $tag
+     * @param \Dragonlands\MovieBundle\Entity\Rating $rating
      *
      * @return Movie
      */
-    public function addTag(\Dragonlands\MovieBundle\Entity\Tag $tag)
+    public function addRating(\Dragonlands\MovieBundle\Entity\Rating $rating)
     {
-        $this->tags[] = $tag;
+        $this->ratings[] = $rating;
 
         return $this;
     }
 
     /**
-     * Remove tag
+     * Remove rating
      *
-     * @param \Dragonlands\MovieBundle\Entity\Tag $tag
+     * @param \Dragonlands\MovieBundle\Entity\Rating $rating
      */
-    public function removeTag(\Dragonlands\MovieBundle\Entity\Tag $tag)
+    public function removeRating(\Dragonlands\MovieBundle\Entity\Rating $rating)
     {
-        $this->tags->removeElement($tag);
+        $this->ratings->removeElement($rating);
     }
 
     /**
-     * Get tags
+     * Get ratings
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTags()
+    public function getRatings()
     {
-        return $this->tags;
+        return $this->ratings;
     }
 }

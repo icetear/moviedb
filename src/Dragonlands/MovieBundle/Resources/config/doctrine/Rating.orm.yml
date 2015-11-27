@@ -1,0 +1,31 @@
+Dragonlands\MovieBundle\Entity\Rating:
+  type: entity
+  repositoryClass: Dragonlands\MovieBundle\Entity\RatingRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    score:
+      type: integer
+      nullable: true
+  manyToOne:
+    user:
+      targetEntity: Dragonlands\MovieBundle\Entity\User
+      inversedBy: ratings
+      joinColumns:
+        user_id:
+          referencedColumnName: id
+    tag:
+      targetEntity: Dragonlands\MovieBundle\Entity\Tag
+      inversedBy: ratings
+      joinColumns:
+        tag_id:
+          referencedColumnName: id
+    movie:
+      targetEntity: Dragonlands\MovieBundle\Entity\Movie
+      inversedBy: ratings
+      joinColumns:
+        movie_id:
+          referencedColumnName: id

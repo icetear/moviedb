@@ -18,22 +18,16 @@ class StatsController extends Controller
     public function indexAction()
     {
 
-        $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Movie');
-        $movies = $repo->findAll();
-        $movies_count = count($movies);
-
-        $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:User');
-        $users = $repo->findAll();
-        $users_count = count($users);
-        
-        $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Tag');
-        $tags = $repo->findAll();
-        $tags_count = count($tags);
+        $users_count = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:User')->getEntityCount();
+        $movies_count = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Movie')->getEntityCount();
+        $tags_count = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Tag')->getEntityCount();
+        $ratings_count = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Rating')->getEntityCount();
         
         return $this->render('DragonlandsMovieBundle:Stats:index.html.twig', 
             array('movies_count' => $movies_count,
                 'users_count' => $users_count,
-                'tags_count' => $tags_count));
+                'tags_count' => $tags_count,
+                'ratings_count' => $ratings_count));
     }
 
 }

@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<skipper version="3.2.4.1256" mvc="Symfony2" orm="Doctrine2" name="Moviedb" uuid="e530b3e7-5e20-4cc7-b1cf-dc830aa73dfd">
+  <module name="\src/Dragonlands/MovieBundle/Resources/config/doctrine" local-name="src/Dragonlands/MovieBundle/Resources/config/doctrine" namespace="\Dragonlands\MovieBundle\Entity" local-namespace="\Dragonlands\MovieBundle\Entity" export-format="Doctrine2Yml" export-path="src/Dragonlands/MovieBundle/Resources/config/doctrine" uuid="767d8f83-0b67-4f11-a66d-577a64d9e074">
+    <entity name="\Dragonlands\MovieBundle\Entity\Movie" local-name="Movie" namespace="\Dragonlands\MovieBundle\Entity" description="Represents a single movie" uuid="83122df6-d05b-4c22-a9ff-3c658660d2ba">
+      <field name="id" type="integer" required="true" primary="true" uuid="e0f45e5e-86a0-4bea-ba5c-59f092851cfb">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="titleOrig" description="Original movie title" type="string" size="255" uuid="dde6e186-f2d3-4a06-b0af-7dc8b9fc93fd">
+        <orm-attributes>
+          <attribute name="column">title_orig</attribute>
+        </orm-attributes>
+      </field>
+      <field name="titleDe" description="German movie title" type="string" size="255" uuid="ffc24d5c-08f6-4204-9962-8c11a40a1a28">
+        <orm-attributes>
+          <attribute name="column">title_de</attribute>
+        </orm-attributes>
+      </field>
+      <field name="year" description="Publishing year" type="integer" uuid="0f734882-6292-41ca-b9ef-cb0082a558eb"/>
+      <field name="length" description="Length in minutes" type="integer" uuid="144eb711-78be-439c-b951-989b560e9462"/>
+      <field name="imdbId" type="string" size="255" uuid="f23ac0c2-2091-4dd6-b34d-315d560199fc">
+        <orm-attributes>
+          <attribute name="column">imdb_id</attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="export-file-name">Movie.orm.yml</attribute>
+        <attribute name="repository-class">Dragonlands\MovieBundle\Entity\MovieRepository</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Dragonlands\MovieBundle\Entity\Tag" local-name="Tag" namespace="\Dragonlands\MovieBundle\Entity" uuid="5ffb044e-2332-4fd7-bdd3-8f0a07f3b630">
+      <field name="id" type="integer" required="true" primary="true" uuid="354e7d65-f875-4da3-b00c-b53a87bcb16c">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" type="string" size="255" uuid="5421b493-de16-4e22-a481-8a0723cab06e"/>
+      <field name="color" type="string" size="6" uuid="ed3ac2b7-2b14-452f-a2f9-28b49588b322"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Tag.orm.yml</attribute>
+        <attribute name="repository-class">Dragonlands\MovieBundle\Entity\TagRepository</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Dragonlands\MovieBundle\Entity\User" local-name="User" namespace="\Dragonlands\MovieBundle\Entity" uuid="323eb2cf-4fb1-49a9-890d-8ed519a54640">
+      <field name="id" type="integer" required="true" primary="true" uuid="f2fee489-de0e-46d6-9f68-9a8e0825403f">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="username" type="string" size="255" uuid="a5b650d8-990d-4200-980b-df0e388cffc8"/>
+      <field name="email" type="string" size="255" uuid="eb75230d-f482-4bec-9573-e140aeef0ede"/>
+      <field name="passwordhash" type="string" size="255" uuid="567e650b-c888-4cfc-b8e0-08ecaf0a2880"/>
+      <orm-attributes>
+        <attribute name="repository-class">Dragonlands\MovieBundle\Entity\UserRepository</attribute>
+        <attribute name="export-file-name">User.orm.yml</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Dragonlands\MovieBundle\Entity\Rating" local-name="Rating" namespace="\Dragonlands\MovieBundle\Entity" description="This is a certain rating from a user for a movie and a certain tag" uuid="dbdfbb8d-e1dd-4c96-809a-eb664e812790">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="58eddb43-86ab-4474-8443-710ec8573e3d"/>
+      <field name="score" type="integer" uuid="2711cd82-3bae-4306-8c31-6368e2ef3035"/>
+      <field name="user_id" type="integer" uuid="56e1f577-04f0-40f9-91f7-6e2a0d1faaf7"/>
+      <field name="tag_id" type="integer" uuid="da7d7de2-a6c3-4c61-9ec3-cfd8ffd59d83"/>
+      <field name="movie_id" type="integer" uuid="7d558b65-3c0f-47a5-b27e-a0a2b09b7c79"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Rating.orm.yml</attribute>
+        <attribute name="repository-class">Dragonlands\MovieBundle\Entity\RatingRepository</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Dragonlands\MovieBundle\Entity\Rating" to="\Dragonlands\MovieBundle\Entity\User" caption="User Rating" owner-alias="ratings" inverse-alias="user" many-owner="true" many-inverse="false" uuid="35979dc0-589c-4d2e-a707-daa72aceaa2e">
+      <association-field from="user_id" to="id"/>
+    </association>
+    <association from="\Dragonlands\MovieBundle\Entity\Rating" to="\Dragonlands\MovieBundle\Entity\Tag" caption="Tag Rating" owner-alias="ratings" inverse-alias="tag" many-owner="true" many-inverse="false" uuid="1650b1ea-eb91-4688-902f-9306227ca498">
+      <association-field from="tag_id" to="id"/>
+    </association>
+    <association from="\Dragonlands\MovieBundle\Entity\Rating" to="\Dragonlands\MovieBundle\Entity\Movie" caption="Movie Rating" owner-alias="ratings" inverse-alias="movie" many-owner="true" many-inverse="false" uuid="ed2ad796-430d-430f-aa3f-d3cb0426d8b0">
+      <association-field from="movie_id" to="id"/>
+    </association>
+  </module>
+  <module name="\vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/Fixtures" local-name="vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/Fixtures" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" local-namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" export-format="Doctrine2Php" export-path="vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/Fixtures" uuid="3753fbcf-7b9b-4eb9-96ee-917a1ca9c824">
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\AssociationEntity" local-name="AssociationEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="8403fd84-5c7e-45f3-ad19-73349b67a080">
+      <field name="id" type="integer" required="true" primary="true" uuid="c5a41ae0-0f5a-4821-b296-e7f8c8270715">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="composite_id1" uuid="7010cc80-7923-4c50-af49-3f1fc785cb01"/>
+      <field name="composite_id2" uuid="c459e1e5-1faa-4eeb-a207-36d7b30c9c7e"/>
+      <field name="single_id" uuid="106042b4-1302-482a-9b0d-09f34549356e"/>
+      <orm-attributes>
+        <attribute name="export-file-name">AssociationEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Symfony\Bridge\Doctrine\Tests\Fixtures\AssociationEntity" to="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdEntity" owner-alias="" inverse-alias="single" many-owner="true" many-inverse="false" uuid="4643312a-0289-44e8-bda4-dc5d1d157de4">
+      <association-field from="single_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Symfony\Bridge\Doctrine\Tests\Fixtures\AssociationEntity" to="\Symfony\Bridge\Doctrine\Tests\Fixtures\CompositeIntIdEntity" owner-alias="" inverse-alias="composite" many-owner="true" many-inverse="false" uuid="b0b35b7b-8b26-4908-9387-96c392ab046f">
+      <association-field from="composite_id1" to="id1"/>
+      <association-field from="composite_id2" to="id2"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\CompositeIntIdEntity" local-name="CompositeIntIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="3f2571da-11c7-42be-9ca3-34d956bcf9cf">
+      <field name="id1" type="integer" required="true" primary="true" uuid="980deeae-6638-41de-b2f5-ee4acda77b56"/>
+      <field name="id2" type="integer" required="true" primary="true" uuid="4e0fe7f7-6386-449b-8d09-0193cf03e20a"/>
+      <field name="name" type="string" uuid="d9340d73-dbbd-4182-bfd6-68103b1f026d"/>
+      <orm-attributes>
+        <attribute name="export-file-name">CompositeIntIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\CompositeStringIdEntity" local-name="CompositeStringIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="dd447591-a893-4c7b-90ce-e72759bcc718">
+      <field name="id1" type="string" required="true" primary="true" uuid="1b17c889-e4bf-4d67-9515-1f3f35a01a6e"/>
+      <field name="id2" type="string" required="true" primary="true" uuid="c614f02c-156e-4549-aa47-2c981b5f064f"/>
+      <field name="name" type="string" uuid="c3a6146b-79ab-46db-a297-9326466bf770"/>
+      <orm-attributes>
+        <attribute name="export-file-name">CompositeStringIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\DoubleNameEntity" local-name="DoubleNameEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="3d9be51a-68e1-491e-b9d0-ac5ba8739c8a">
+      <field name="id" type="integer" required="true" primary="true" uuid="59964066-62ff-48f4-8a4c-250405e15bd2"/>
+      <field name="name" type="string" uuid="d6c1de3f-dd0d-4ae4-8752-4c4b0ba4aa8d"/>
+      <field name="name2" type="string" uuid="e6041714-1f01-4d8f-b84f-aace75e950b9"/>
+      <orm-attributes>
+        <attribute name="export-file-name">DoubleNameEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\GroupableEntity" local-name="GroupableEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="b30c8bb9-cc10-4c77-a419-171fd24525e9">
+      <field name="id" type="integer" required="true" primary="true" uuid="d681e072-2b2c-4c1e-bc3a-241cedbf3902"/>
+      <field name="name" type="string" uuid="e6c43ee8-4795-4097-95cb-dffafca7e39c"/>
+      <field name="groupName" type="string" uuid="aa928e11-8e51-450f-9110-c52c38ee762d"/>
+      <orm-attributes>
+        <attribute name="export-file-name">GroupableEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleAssociationToIntIdEntity" local-name="SingleAssociationToIntIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="ee982083-c692-4f73-bd14-d5e1d3d955e2">
+      <field name="entity" required="true" primary="true" uuid="3585fb73-0691-4e63-af01-62c98fa24822"/>
+      <field name="name" type="string" uuid="1cc8eeca-fbce-4474-bb11-f419084dff41"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleAssociationToIntIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleAssociationToIntIdEntity" to="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdNoToStringEntity" owner-alias="" inverse-alias="entity" many-owner="true" many-inverse="false" parent-required="true" uuid="0f68073e-1266-475a-ad68-7361a4e0e517">
+      <association-field from="entity" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="cascade">
+            <attribute name="cascade-all">true</attribute>
+          </attribute>
+        </attribute>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdEntity" local-name="SingleIntIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="b981a4ab-1497-4801-8a19-f5053e7dc61a">
+      <field name="id" type="integer" required="true" primary="true" uuid="abb3ff2f-544e-4050-923c-567ddd8aad30"/>
+      <field name="name" type="string" uuid="6b956de8-ca90-4d5f-ac36-26b8749a69dd"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleIntIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdNoToStringEntity" local-name="SingleIntIdNoToStringEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="5c7da45d-d2c3-442f-81a2-3370ac471d51">
+      <field name="id" type="integer" required="true" primary="true" uuid="5e0c5418-48b6-4365-99de-3cb6fb2af286"/>
+      <field name="name" type="string" uuid="f93cc926-ee87-4c94-b81c-20d8d1c012f0"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleIntIdNoToStringEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleStringIdEntity" local-name="SingleStringIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="5ff5aae1-8a20-4a6a-ad72-591b66a31e29">
+      <field name="id" type="string" required="true" primary="true" uuid="5611e359-2201-4d62-88d9-67efd9541109"/>
+      <field name="name" type="string" uuid="fd6dbf60-a524-4b65-93ef-0208ec4a53e5"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleStringIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\User" local-name="User" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="faf73bda-070d-4150-8f35-dd4bbeb438e6">
+      <field name="id1" type="integer" required="true" primary="true" uuid="4a069bf1-311a-4827-a83a-5cf95dc39a2a"/>
+      <field name="id2" type="integer" required="true" primary="true" uuid="da966955-a890-410b-af0d-56f82944a3a1"/>
+      <field name="name" type="string" uuid="80ecb504-6938-4dd5-b1f1-39570cf18bea"/>
+      <orm-attributes>
+        <attribute name="export-file-name">User.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <module name="\vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config" local-name="vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config" namespace="\" export-format="Doctrine2Xml" export-path="vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config" uuid="557f1d98-6eb6-4741-94a4-0ced7d2352b0"/>
+  <visual-data>
+    <association uuid="0f68073e-1266-475a-ad68-7361a4e0e517" color="#A8A8A8"/>
+    <association uuid="1650b1ea-eb91-4688-902f-9306227ca498" color="#969696"/>
+    <association uuid="35979dc0-589c-4d2e-a707-daa72aceaa2e" color="#969696"/>
+    <association uuid="4643312a-0289-44e8-bda4-dc5d1d157de4" color="#2E63AF"/>
+    <association uuid="b0b35b7b-8b26-4908-9387-96c392ab046f" color="#00B4D0"/>
+    <association uuid="ed2ad796-430d-430f-aa3f-d3cb0426d8b0" color="#969696"/>
+    <entity uuid="323eb2cf-4fb1-49a9-890d-8ed519a54640" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="19" position-y="304" size-x="0" size-x2="133" size-y="0" size-y2="73"/>
+    <entity uuid="3d9be51a-68e1-491e-b9d0-ac5ba8739c8a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="46" position-y="153" size-x="0" size-x2="88" size-y="0" size-y2="59"/>
+    <entity uuid="3f2571da-11c7-42be-9ca3-34d956bcf9cf" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="221" position-y="40" size-x="0" size-x2="98" size-y="0" size-y2="59"/>
+    <entity uuid="5c7da45d-d2c3-442f-81a2-3370ac471d51" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="206" position-y="266" size-x="0" size-x2="127" size-y="0" size-y2="45"/>
+    <entity uuid="5ff5aae1-8a20-4a6a-ad72-591b66a31e29" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="403" position-y="266" size-x="0" size-x2="94" size-y="0" size-y2="45"/>
+    <entity uuid="5ffb044e-2332-4fd7-bdd3-8f0a07f3b630" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="21" position-y="204" size-x="0" size-x2="98" size-y="0" size-y2="59"/>
+    <entity uuid="83122df6-d05b-4c22-a9ff-3c658660d2ba" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="352" position-y="54" size-x="0" size-x2="106" size-y="0" size-y2="101"/>
+    <entity uuid="8403fd84-5c7e-45f3-ad19-73349b67a080" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="48" position-y="40" size-x="0" size-x2="84" size-y="0" size-y2="73"/>
+    <entity uuid="b30c8bb9-cc10-4c77-a419-171fd24525e9" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="219" position-y="153" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
+    <entity uuid="b981a4ab-1497-4801-8a19-f5053e7dc61a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="50" position-y="266" size-x="0" size-x2="79" size-y="0" size-y2="45"/>
+    <entity uuid="dbdfbb8d-e1dd-4c96-809a-eb664e812790" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="277" position-y="304" size-x="0" size-x2="96" size-y="0" size-y2="87"/>
+    <entity uuid="dd447591-a893-4c7b-90ce-e72759bcc718" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="393" position-y="40" size-x="0" size-x2="113" size-y="0" size-y2="59"/>
+    <entity uuid="ee982083-c692-4f73-bd14-d5e1d3d955e2" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="380" position-y="153" size-x="0" size-x2="140" size-y="0" size-y2="45"/>
+    <entity uuid="faf73bda-070d-4150-8f35-dd4bbeb438e6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="51" position-y="379" size-x="0" size-x2="77" size-y="0" size-y2="59"/>
+    <module uuid="3753fbcf-7b9b-4eb9-96ee-917a1ca9c824" bg-color="#E7F3E7" position-x="86" position-y="50" size-x="0" size-x2="540" size-y="0" size-y2="472"/>
+    <module uuid="557f1d98-6eb6-4741-94a4-0ced7d2352b0" bg-color="#FEFCE8" position-x="532" position-y="622" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="767d8f83-0b67-4f11-a66d-577a64d9e074" bg-color="#E7F5FD" position-x="48" position-y="546" size-x="0" size-x2="478" size-y="0" size-y2="426"/>
+    <project uuid="e530b3e7-5e20-4cc7-b1cf-dc830aa73dfd" size-x="0" size-x2="682" size-y="0" size-y2="1022"/>
+  </visual-data>
+</skipper>

@@ -1,18 +1,21 @@
 Dragonlands\MovieBundle\Entity\Tag:
-    type: entity
-    table: null
+  type: entity
+  repositoryClass: Dragonlands\MovieBundle\Entity\TagRepository
+  id:
     id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-    fields:
-        name:
-            type: string
-            length: 255
-    lifecycleCallbacks: {  }
-    manyToMany:
-        movies:
-            targetEntity: Movie
-            mappedBy: tags
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 255
+      nullable: true
+    color:
+      type: string
+      length: 6
+      nullable: true
+  oneToMany:
+    ratings:
+      targetEntity: Dragonlands\MovieBundle\Entity\Rating
+      mappedBy: tag
