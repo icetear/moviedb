@@ -34,24 +34,17 @@ class Tag
     */
     public function getRatingForMovie(Movie $movie)
     {
-
-        //  get all ratings for this tag and this movie
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery(
-            'SELECT r.score
-            FROM DragonlandsMovieBundle:Rating r
-            WHERE r.movie_id = :movie_id
-            AND r.tag_id = :tag_id'
-            )->setParameters(array('movie_id' => $movie->id, 'tag_id' => $this->id));
-
-        $ratings = $query->getResult();
-
         $rating_sum = 0;
-        $count = count($ratings);
-        foreach($ratings as $rating)
+        $count = count($this->ratings);
+        
+        foreach($this->ratings as $rating)
         {
-            $rating_sum += $rating.score;
+            if($rating->getMovie() === $movie)
+            {
+                $rating_sum += $rating->getScore();
+            }
         }
+
         $rating_sum /= $count;
 
         return $rating_sum;

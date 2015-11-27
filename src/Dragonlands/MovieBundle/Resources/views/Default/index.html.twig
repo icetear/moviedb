@@ -18,13 +18,13 @@
         {% for movie in movies %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-sm-7">
-                        <p>{{ movie.titleOrig }}</p>
+                    <div class="col-sm-5">
+                        <p>{{ movie.titleOrig }} ({{ movie.year }})</p>
                         <p class="small">{{ movie.titleDe }}</p>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-4">
                         {% for tag in movie.tags %}
-                          <p>{{ tag }} ({{ tag.getRatingForMovie(movie) }})</p>
+                          <button type="button" class="btn btn-primary" style="border-color:#{{ tag.color }};background-color:#{{ tag.color }};">{{ tag }} <span class="badge">{{ tag.getRatingForMovie(movie) }}</span></button>
                         {% endfor %}
                     </div>
                     <div class="col-sm-3 text-right">

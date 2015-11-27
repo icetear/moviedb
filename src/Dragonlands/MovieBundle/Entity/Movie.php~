@@ -57,25 +57,15 @@ class Movie
     public function tags()
     {
 
-
-        //  the tags that are relevant for this movie are those that have a rating
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery(
-            'SELECT DISTINCT(r.tag_id)
-            FROM DragonlandsMovieBundle:Rating r
-            WHERE r.movie_id = :movie_id'
-            )->setParameters(array('movie_id' => $this->id));
-
-        $tag_ids = $query->getResult();
+        //  we already have the ratings for this movie
+        //  now we must group them by tag
 
         $tags = [];
 
-        $repo = $this->getDoctrine()->getRepository('DragonlandsMovieBundle:Tag');
-        foreach($tag_ids as $tag_id)
+        foreach($this->ratings as $rating)
         {
-            //  get the tag
-            $tag = $repo->findOneById($tag_id);
-            $tags[] = $tag;
+            $tag = $rating->getTag();
+            if(!in_array($tag, $tags)) $tags[] = $tag;
         }
 
         return $tags;

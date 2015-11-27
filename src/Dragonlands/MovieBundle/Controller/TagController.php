@@ -28,6 +28,7 @@ class TagController extends Controller
 
         $form = $this->createFormBuilder($tag)
             ->add('name', 'text')
+            ->add('color', 'text')
             ->add('save', 'submit', array('label' => 'Create Tag'))
             ->getForm();
 
@@ -61,6 +62,7 @@ class TagController extends Controller
         
         $form = $this->createFormBuilder($tag)
             ->add('name', 'text')
+            ->add('color', 'text')
             ->add('save', 'submit', array('label' => 'Save Tag'))
             ->getForm();
 

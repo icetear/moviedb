@@ -21,7 +21,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-sm-9">
-                        <p>{{ tag.name }}</p>                        
+                        <p><div class="btn btn-warning" style="border-color:#{{ tag.color }};background-color:#{{ tag.color }};">{{ tag.name }}</div></p>
                     </div>
                     <div class="col-sm-3 text-right">                        
                         <a class="btn btn-warning" data-toggle="tooltip" title="Modify this tag" href="/modifyTag/{{ tag.id }}">Modify</a>
