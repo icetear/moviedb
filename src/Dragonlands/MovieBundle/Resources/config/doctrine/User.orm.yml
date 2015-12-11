@@ -1,5 +1,6 @@
 Dragonlands\MovieBundle\Entity\User:
   type: entity
+  table: fos_user
   repositoryClass: Dragonlands\MovieBundle\Entity\UserRepository
   id:
     id:
@@ -7,19 +8,6 @@ Dragonlands\MovieBundle\Entity\User:
       generator:
         strategy: AUTO
   fields:
-    username:
-      type: string
-      length: 255
+    comment:
+      type: text
       nullable: true
-    email:
-      type: string
-      length: 255
-      nullable: true
-    passwordhash:
-      type: string
-      length: 255
-      nullable: true
-  oneToMany:
-    ratings:
-      targetEntity: Dragonlands\MovieBundle\Entity\Rating
-      mappedBy: user

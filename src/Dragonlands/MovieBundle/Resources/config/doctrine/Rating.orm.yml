@@ -11,12 +11,6 @@ Dragonlands\MovieBundle\Entity\Rating:
       type: integer
       nullable: true
   manyToOne:
-    user:
-      targetEntity: Dragonlands\MovieBundle\Entity\User
-      inversedBy: ratings
-      joinColumns:
-        user_id:
-          referencedColumnName: id
     tag:
       targetEntity: Dragonlands\MovieBundle\Entity\Tag
       inversedBy: ratings
