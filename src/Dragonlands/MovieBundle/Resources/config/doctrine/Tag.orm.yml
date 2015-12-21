@@ -17,5 +17,6 @@ Dragonlands\MovieBundle\Entity\Tag:
       nullable: true
   oneToMany:
     ratings:
+      orderBy: {'score': 'DESC'}
       targetEntity: Dragonlands\MovieBundle\Entity\Rating
       mappedBy: tag

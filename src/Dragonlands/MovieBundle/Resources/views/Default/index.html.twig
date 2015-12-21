@@ -21,7 +21,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-sm-5">
-                        <p>{{ movie.titleOrig }} ({{ movie.year }}) - created by {{ movie.user }}</p>
+                        <p><a href="{{ path('showMovie', {'id': movie.id})  }}">{{ movie.titleOrig }}</a> ({{ movie.year }}) - created by {{ movie.user }}</p>
                         <p class="small">{{ movie.titleDe }}</p>
                     </div>
                     <div class="col-sm-4">
@@ -31,8 +31,10 @@
                     </div>
                     <div class="col-sm-3 text-right">
                         <a class="btn btn-info" data-toggle="tooltip" title="Go to IMDB title" href="http://www.imdb.com/title/{{ movie.imdbId }}">IMDB</a>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <a class="btn btn-warning" data-toggle="tooltip" title="Modify this movie" href="{{ path('modifyMovie', {'id': movie.id}) }}">Modify</a>
                         <a class="btn btn-danger" data-toggle="tooltip" title="Delete this movie from the database" onclick="return confirm('really delete?');"  href="{{ path('deleteMovie', {'id': movie.id}) }}">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
             </li>

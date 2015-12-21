@@ -68,9 +68,22 @@ class Movie
             if(!in_array($tag, $tags)) $tags[] = $tag;
         }
 
+        usort($tags, array($this, "cmp"));
+
         return $tags;
         
     }
+
+    /**
+     * @param $a
+     * @param $b
+     * @return int
+     */
+    public function cmp($a, $b)
+    {
+        return strcmp($a->getName(), $b->getName());
+    }
+
 
     /**
      * Get id

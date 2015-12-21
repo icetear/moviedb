@@ -22,4 +22,9 @@ class TagRepository extends \Doctrine\ORM\EntityRepository
         return $count;
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
+
 }

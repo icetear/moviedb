@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>{{ entity.titleOrig }}</h1>
+
+    <table class="record_properties">
+        <tbody>
+        <tr>
+            <th class="col-sm-5">German Title</th>
+            <td>{{ entity.titleDe }}</td>
+        </tr>
+        <tr>
+            <th class="col-sm-5">Original Title</th>
+            <td>{{ entity.titleOrig }}</td>
+        </tr>
+        <tr>
+            <th class="col-sm-5">Year</th>
+            <td>{{ entity.year }}</td>
+        </tr>
+        <tr>
+            <th class="col-sm-5">Length</th>
+            <td>{{ entity.length }} min.</td>
+        </tr>
+        <tr>
+            <th class="col-sm-5 align-top">Tags</th>
+            <td>
+                <ul class="list-group">
+                {% for tag in entity.tags %}
+                    <li class="list-group-item"><button type="button" class="btn btn-primary" style="border-color:#{{ tag.color }};background-color:#{{ tag.color }};">{{ tag }} <span class="badge">{{ tag.getRatingForMovie(entity) }}</span>&nbsp;<span class="badge">{{ tag.getRatingCountForMovie(entity) }} Vote</span></button></li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('homepage') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock %}

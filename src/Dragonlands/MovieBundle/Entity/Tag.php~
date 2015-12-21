@@ -51,6 +51,19 @@ class Tag
 
     }
 
+    /*
+     * return all movies that are rated with this tag
+     */
+    public function getMovies()
+    {
+        $movies = array();
+        foreach($this->ratings as $rating)
+        {
+            $movies[] = $rating->getMovie();
+        }
+        return $movies;
+    }
+
     /**
      * Get id
      *

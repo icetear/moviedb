@@ -62,7 +62,44 @@ class DefaultController extends Controller
             ));
     }
 
+    /**
+     * Finds and displays a Rating entity.
+     *
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $entity = $em->getRepository('DragonlandsMovieBundle:Movie')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Movie entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('DragonlandsMovieBundle:Default:show.html.twig', array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Creates a form to delete a Movie entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('deleteMovie', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm()
+            ;
+    }
     /*
     *   show form for modifying an existing movie
     */

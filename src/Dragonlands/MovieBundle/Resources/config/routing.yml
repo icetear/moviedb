@@ -14,6 +14,10 @@ newMovie:
     path:   /new
     defaults: { _controller: DragonlandsMovieBundle:Default:new }
 
+showMovie:
+    path:   /show/{id}
+    defaults: { _controller: DragonlandsMovieBundle:Default:show }
+
 deleteMovie:
     path:   /delete/{id}
     defaults: { _controller: DragonlandsMovieBundle:Default:delete }

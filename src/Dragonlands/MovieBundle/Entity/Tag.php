@@ -35,20 +35,52 @@ class Tag
     public function getRatingForMovie(Movie $movie)
     {
         $rating_sum = 0;
-        $count = count($this->ratings);
+        $count = 0;
         
         foreach($this->ratings as $rating)
         {
             if($rating->getMovie() === $movie)
             {
                 $rating_sum += $rating->getScore();
+                $count++;
             }
         }
 
-        $rating_sum /= $count;
+        if($count > 0) $rating_sum /= $count;
 
         return $rating_sum;
 
+    }
+
+    /*
+    *   gets the number of ratings for this tag for a certain movie
+    */
+    public function getRatingCountForMovie(Movie $movie)
+    {
+        $count = 0;
+
+        foreach($this->ratings as $rating)
+        {
+            if($rating->getMovie() === $movie)
+            {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+
+    /*
+     * return all movies that are rated with this tag
+     */
+    public function getMovies()
+    {
+        $movies = array();
+        foreach($this->ratings as $rating)
+        {
+            $movies[] = $rating->getMovie();
+        }
+        return $movies;
     }
 
     /**
