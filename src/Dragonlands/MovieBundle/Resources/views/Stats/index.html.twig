@@ -1,6 +1,5 @@
-<div class="col-md-12 bg-primary">
-    <div class="col-md-8">
-        Statistics - <a class="btn btn-info btn-xs" href="{{ path('homepage') }}">Movies: {{ movies_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('showTags') }}">Tags: {{ tags_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('user') }}">Users: {{ users_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('rating') }}">Ratings: {{ ratings_count }}</a>
+<div class="col-md-12 bg-primary well-sm">
+    <div class="col-md-8"><a class="btn btn-info btn-xs" href="{{ path('homepage') }}">Movies: {{ movies_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('showTags') }}">Tags: {{ tags_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('user') }}">Users: {{ users_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('rating') }}">Ratings: {{ ratings_count }}</a>
     </div>
     <div class="col-md-4 text-right">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

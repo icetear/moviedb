@@ -26,7 +26,7 @@
             <td>
                 <ul class="list-group">
                 {% for tag in entity.tags %}
-                    <li class="list-group-item"><button type="button" class="btn btn-primary" style="border-color:#{{ tag.color }};background-color:#{{ tag.color }};">{{ tag }} <span class="badge">{{ tag.getRatingForMovie(entity) }}</span>&nbsp;<span class="badge">{{ tag.getRatingCountForMovie(entity) }} Vote</span></button></li>
+                    <li class="list-group-item">{{ tag }} <span class="badge">{{ tag.getRatingForMovie(entity) }} / {{ tag.getRatingCountForMovie(entity) }}</span></li>
                 {% endfor %}
                 </ul>
             </td>
