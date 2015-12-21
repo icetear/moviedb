@@ -1,3 +1,15 @@
-<div class="bg-primary well-sm">
-Statistics - <a class="btn btn-info btn-xs" href="/">Movies: {{ movies_count }}</a> <a class="btn btn-info btn-xs" href="/showTags">Tags: {{ tags_count }}</a> <a class="btn btn-info btn-xs" href="/user/">Users: {{ users_count }}</a> <a class="btn btn-info btn-xs" href="/rating/">Ratings: {{ ratings_count }}</a>
+<div class="col-md-12 bg-primary">
+    <div class="col-md-8">
+        Statistics - <a class="btn btn-info btn-xs" href="{{ path('homepage') }}">Movies: {{ movies_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('showTags') }}">Tags: {{ tags_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('user') }}">Users: {{ users_count }}</a> <a class="btn btn-info btn-xs" href="{{ path('rating') }}">Ratings: {{ ratings_count }}</a>
+    </div>
+    <div class="col-md-4 text-right">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a class="btn btn-danger btn-xs" href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% else %}
+            <a class="btn btn-danger btn-xs" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+        {% endif %}
+    </div>
 </div>

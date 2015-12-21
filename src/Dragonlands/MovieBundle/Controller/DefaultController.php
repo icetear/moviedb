@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dragonlands\MovieBundle\Entity\Movie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\UserBundle\Model\UserInterface;
 
 class DefaultController extends Controller
 {
@@ -24,6 +26,14 @@ class DefaultController extends Controller
     public function newAction(Request $request)
     {
         $movie = new Movie();
+
+        //  what user is logged in? this information will be saved with the movie
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $movie->setUser($user);
 
         $form = $this->createFormBuilder($movie)
             ->add('titleOrig', 'text')
@@ -101,5 +111,21 @@ class DefaultController extends Controller
 
         return $this->redirectToRoute('homepage');        
     }
+
+
+    public function getomdbinfoAction(Request $request)
+    {
+        //  fetch the id from the request
+        $id = $request->get('id');
+
+        //  get the info from the OMDB site
+
+
+        //  return the info
+        $response = array("code" => 100, "success" => true, "titleOrig" => "MyTitle");
+        return new Response(json_encode($response));
+
+    }
+
 
 }

@@ -252,4 +252,33 @@ class Movie
     {
         return $this->ratings;
     }
+    /**
+     * @var \Dragonlands\MovieBundle\Entity\User
+     */
+    private $user;
+
+
+    /**
+     * Set user
+     *
+     * @param \Dragonlands\MovieBundle\Entity\User $user
+     *
+     * @return Movie
+     */
+    public function setUser(\Dragonlands\MovieBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Dragonlands\MovieBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

@@ -23,3 +23,9 @@ Dragonlands\MovieBundle\Entity\Rating:
       joinColumns:
         movie_id:
           referencedColumnName: id
+    user:
+      targetEntity: User
+      inversedBy: ratings
+      joinColumn:
+        name: user_id
+        referencedColumnName: id

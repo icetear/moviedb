@@ -1,10 +1,10 @@
-dragonlands_movie_user:
-    resource: "@DragonlandsMovieBundle/Resources/config/routing/user.yml"
-    prefix:   /user
-
 dragonlands_movie_rating:
     resource: "@DragonlandsMovieBundle/Resources/config/routing/rating.yml"
     prefix:   /rating
+
+dragonlands_movie_user:
+    resource: "@DragonlandsMovieBundle/Resources/config/routing/user.yml"
+    prefix:   /user
 
 homepage:
     path:   /
@@ -21,6 +21,11 @@ deleteMovie:
 modifyMovie:
     path:   /modify/{id}
     defaults: { _controller: DragonlandsMovieBundle:Default:modify }
+
+# ajax routine to fetch omdb info
+getomdbinfo:
+    path:   /getomdbinfo
+    defaults: { _controller: DragonlandsMovieBundle:Default:getomdbinfo }
 
 showTags:
     path:   /showTags

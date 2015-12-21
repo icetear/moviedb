@@ -8,6 +8,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <script src="{{ asset('js/javascript.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}"/>
+        <link rel="stylesheet" media="screen" type="text/css" href="{{ asset('css/colorpicker.css') }}" />
+        <script type="text/javascript" src="{{ asset('js/colorpicker.js') }}"></script>
     </head>
     <body>
 
@@ -22,7 +24,7 @@
             {#  show a copyright notice with a backlink to the homepage #}
             {#                                                          #}
             <div class="row">
-                <div class="col-sm-12"><div class="bg-info"><a href="/">MovieDB</a> created by Mario J. Gaida</div></div>
+                <div class="col-sm-12"><div class="bg-info"><a href="{{ path('homepage') }}">MovieDB</a> created by Mario J. Gaida</div></div>
             </div>
             
             <div class="row">

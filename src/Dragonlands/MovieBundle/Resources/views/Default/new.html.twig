@@ -80,13 +80,36 @@
 
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-offset-2 col-sm-1">
             {{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
+        </div>
+        <div class="col-sm-9">
+            <div id="fetchomdbinfobutton" class="btn btn-default">Fetch OMDb Info</div>
         </div>
     </div>
 
 {{ form_rest(form) }}
 {{ form_end(form) }}
 
-    
+    <script>
+
+        function omdbinfobuttonpressed() {
+            var imdb_id = $('#form_imdbId').val();
+            $.ajax({
+                url: "http://www.omdbapi.com/?",
+                dataType: 'json',
+                data: { "i": imdb_id, "plot": "short", "r": "json"},
+                success: function(response) {
+                    //  fill in info in form fields
+                    $('#form_titleOrig').val(response.Title);
+                    $('#form_length').val(response.Runtime);
+                    $('#form_year').val(response.Year);
+                }
+            });
+        }
+
+        $('#fetchomdbinfobutton').on('click', function() {omdbinfobuttonpressed();});
+
+    </script>
+
 {% endblock %}

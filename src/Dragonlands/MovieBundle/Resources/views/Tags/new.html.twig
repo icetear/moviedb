@@ -44,5 +44,23 @@
 {{ form_rest(form) }}
 {{ form_end(form) }}
 
-    
+
+    <script>
+
+        $('#form_color').ColorPicker({
+                    onSubmit: function(hsb, hex, rgb, el) {
+                        $(el).val(hex);
+                        $(el).ColorPickerHide();
+                    },
+                    onBeforeShow: function () {
+                        $(this).ColorPickerSetColor(this.value);
+                    }
+                })
+                .bind('keyup', function(){
+                    $(this).ColorPickerSetColor(this.value);
+                });
+
+    </script>
+
+
 {% endblock %}

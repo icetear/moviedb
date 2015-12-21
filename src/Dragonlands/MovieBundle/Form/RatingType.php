@@ -16,9 +16,9 @@ class RatingType extends AbstractType
     {
         $builder
             ->add('score')
-            ->add('user')
             ->add('tag')
             ->add('movie')
+            ->add('user')
         ;
     }
     

@@ -1,6 +1,6 @@
 Dragonlands\MovieBundle\Entity\User:
   type: entity
-  table: fos_user
+  table: user
   repositoryClass: Dragonlands\MovieBundle\Entity\UserRepository
   id:
     id:
@@ -11,3 +11,13 @@ Dragonlands\MovieBundle\Entity\User:
     comment:
       type: text
       nullable: true
+    birthday:
+      type: datetime
+      nullable: true
+  oneToMany:
+    movies:
+      targetEntity: Movie
+      mappedBy: user
+    ratings:
+      targetEntity: Rating
+      mappedBy: user

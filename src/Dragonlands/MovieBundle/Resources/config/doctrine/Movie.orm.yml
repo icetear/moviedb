@@ -28,7 +28,16 @@ Dragonlands\MovieBundle\Entity\Movie:
       length: 255
       nullable: true
       column: imdb_id
+  # a movie can have several ratings
   oneToMany:
     ratings:
       targetEntity: Dragonlands\MovieBundle\Entity\Rating
       mappedBy: movie
+  # a movie has a creator
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy: movies
+      joinColumn:
+        name: user_id
+        referencedColumnName: id

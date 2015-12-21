@@ -6,12 +6,14 @@
     <h1>Movies</h1>
     <div class="row">
         <div class="col-sm-6">
-            <p><a class="btn btn-primary" data-toggle="tooltip" title="Create a new movie entry" href="/new">New Movie</a></p>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <p><a class="btn btn-primary" data-toggle="tooltip" title="Create a new movie entry" href="{{ path('newMovie') }}">New Movie</a></p>
+        {% else %}
+            <p>Please <a href="{{ path('fos_user_security_login') }}">login</a> to create a new movie</p>
+        {% endif %}
         </div>
         <div class="col-sm-6">
-            
 
-            
         </div>
     </div>
     <ul class="list-group">
@@ -19,7 +21,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-sm-5">
-                        <p>{{ movie.titleOrig }} ({{ movie.year }})</p>
+                        <p>{{ movie.titleOrig }} ({{ movie.year }}) - created by {{ movie.user }}</p>
                         <p class="small">{{ movie.titleDe }}</p>
                     </div>
                     <div class="col-sm-4">
@@ -29,8 +31,8 @@
                     </div>
                     <div class="col-sm-3 text-right">
                         <a class="btn btn-info" data-toggle="tooltip" title="Go to IMDB title" href="http://www.imdb.com/title/{{ movie.imdbId }}">IMDB</a>
-                        <a class="btn btn-warning" data-toggle="tooltip" title="Modify this movie" href="/modify/{{ movie.id }}">Modify</a>
-                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete this movie from the database" href="/delete/{{ movie.id }}">Delete</a>
+                        <a class="btn btn-warning" data-toggle="tooltip" title="Modify this movie" href="{{ path('modifyMovie', {'id': movie.id}) }}">Modify</a>
+                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete this movie from the database" onclick="return confirm('really delete?');"  href="{{ path('deleteMovie', {'id': movie.id}) }}">Delete</a>
                     </div>
                 </div>
             </li>
